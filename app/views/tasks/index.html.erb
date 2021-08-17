@@ -1,21 +1,23 @@
 <div class="container">
   <h1>My tasks</h1>
-  <ul>
+  <ul class="list-group">
     <% @tasks.each do |task| %>
-        <li>
+        <li class="list-group-item list-group-item-action border">
           <% if task.completed? %>
-            <i class="far fa-check-square"></i>
+            <%= link_to '<i class="far fa-check-square"></i>'.html_safe, task_path(task) %>
           <% else %>
-            <i class="far fa-square"></i>
+            <%= link_to '<i class="far fa-square"></i>'.html_safe, task_path(task) %>
           <% end %>
-          <%# <%= task.completed? ? "✅" : "❌" %>
           <%= link_to task.title, task_path(task) %>
-          <%= link_to 'delete', task_path(task), method: :delete, data: { confirm: "Whoa! Are you sure?"} %>
+          <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, task_path(task), method: :delete, data: { confirm: "Whoa! Are you sure?"} %>
         </li>
     <% end %>
+    <li class ="list-group-item list-group-item-action list-group-item-primary border">
+      <%= link_to '<i class="far fa-plus-square"></i>'.html_safe, new_task_path %>
+      <%= link_to 'create new task', new_task_path %>
+    </li>
     </ul>
     <p>
-      <i class='far fa-plus-square'></i>
-      <%= link_to 'create new task', new_task_path %>
+
     </p>
 </div>
